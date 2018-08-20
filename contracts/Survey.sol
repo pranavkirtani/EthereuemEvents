@@ -26,27 +26,45 @@ contract Survey {
   
 }
 contract Questionare{
-    QuestionCon q;
-     constructor(){
-         q=new QuestionCon();
-     }
+    
+    mapping (uint => address) question_add_map;
+    
      function addQuestion(string question,uint question_id) public {
+         QuestionCon q;
+         address ques_con=new QuestionCon();
+         q=QuestionCon(ques_con);
+         question_add_map[question_id]=ques_con;
          q.addQuestion(question,question_id);
      }
      
      function readQuestions(uint id) view public returns (string) {
+         QuestionCon q;
+         address ques_con=question_add_map[id];
+         q=QuestionCon(ques_con);
          return q.readQuestions(id);
      }
      function answerQuestion(uint question_id,string answer) public{
+         QuestionCon q;
+         address ques_con=question_add_map[question_id];
+         q=QuestionCon(ques_con);
          return q.answerQuestion(question_id,answer);
      }
      function readAnswers(uint question_id,uint index) view public returns (string){
+         QuestionCon q;
+         address ques_con=question_add_map[question_id];
+         q=QuestionCon(ques_con);
          return q.readAnswers(question_id,index);
      }
      function answerYesNoQuestion(uint question_id,bool answer) public{
+         QuestionCon q;
+         address ques_con=question_add_map[question_id];
+         q=QuestionCon(ques_con);
          return q.answerYesNoQuestion(question_id,answer);
      }
      function readYesNoAnswers(uint question_id)view public returns (uint,uint){
+         QuestionCon q;
+         address ques_con=question_add_map[question_id];
+         q=QuestionCon(ques_con);
          return q.readYesNoAnswers(question_id);
      }
     
